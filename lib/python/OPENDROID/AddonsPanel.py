@@ -47,7 +47,7 @@ from Screens.TaskView import JobView
 from ServiceReference import ServiceReference
 import os, sys
 from os import listdir
-from twisted.web.client import downloadPage 
+from twisted.web.client import downloadPage
 import urllib
 from enigma import *
 import sys,os
@@ -103,7 +103,7 @@ class AddonsUtility(Screen):
 	skin = """
 		<screen name="AddonsUtility" position="center,60" size="800,635" title="OPENDROID Addons Manager" >
 		<widget name="list" position="80,100" size="710,350" zPosition="2" scrollbarMode="showOnDemand" transparent="1"/>
-		<widget name="key_red" position="135,600" zPosition="1" size="180,45" font="Regular;18" foregroundColor="red" backgroundColor="red" transparent="1" />		
+		<widget name="key_red" position="135,600" zPosition="1" size="180,45" font="Regular;18" foregroundColor="red" backgroundColor="red" transparent="1" />
 		<widget name="key_green" position="400,600" zPosition="1" size="100,45" font="Regular;18" foregroundColor="green" backgroundColor="green" transparent="1" />
 		<widget name="key_yellow" position="675,600" zPosition="1" size="180,45" font="Regular;18" foregroundColor="yellow" backgroundColor="yellow" transparent="1" />
 		</screen>"""
@@ -128,15 +128,15 @@ class AddonsUtility(Screen):
 			'back': self.close,
 			'green': self.Remove,
 			'yellow' : self.RestartE2,
-			
+
 		})
 		self.onLayoutFinish.append(self.updateList)
-		
-	
+
+
 	def Remove(self):
 		self.session.open(AddonsRemove)
 	def RestartE2(self):
-		msg="Do you want Restart GUI now ?" 
+		msg="Do you want Restart GUI now ?"
 		self.session.openWithCallback(self.Finish, MessageBox, msg, MessageBox.TYPE_YESNO)
 	def Finish(self, answer):
 		if answer is True:
@@ -175,7 +175,7 @@ class AddonsUtility(Screen):
 
 	def messpopup(self,msg):
 		self.session.open(MessageBox, msg , MessageBox.TYPE_INFO)
-	
+
 	def updateList(self):
 		for i in self.entrylist:
 				res = [i]
@@ -190,7 +190,7 @@ class AddonsUtility(Screen):
 #Remove Addons
 ###################################################################################
 class	AddonsRemove(Screen):
-	
+
 	skin = """
 		<screen name="AddonsRemove" position="80,160" size="1100,450" title="Remove Plugins">
 				<widget name="list" position="5,0" size="560,300" itemHeight="49" foregroundColor="white" backgroundColor="black" transparent="1" scrollbarMode="showOnDemand" zPosition="2" enableWrapAround="1" />
@@ -205,8 +205,8 @@ class	AddonsRemove(Screen):
 				<eLabel name="spaceused" text="% Flash Used..." position="45,414" size="150,20" font="Regular;19" halign="left" foregroundColor="white" backgroundColor="black" transparent="1" zPosition="5" />
 				<widget name="spaceused" position="201,415" size="894,20" foregroundColor="white" backgroundColor="blue" zPosition="3" />
 			</screen>"""
-	
-	REMOVE = 1		  
+
+	REMOVE = 1
 	DOWNLOAD = 0
 	PLUGIN_PREFIX = 'enigma2-plugin-'
 	lastDownloadDate = None
@@ -234,11 +234,11 @@ class	AddonsRemove(Screen):
 		self.check_bootlogo = False
 		self.install_settings_name = ''
 		self.remove_settings_name = ''
-		self['spaceused'] = ProgressBar()		
+		self['spaceused'] = ProgressBar()
 		self["status"] = ScrollLabel()
-		self['key_green']  = Label(_('Remove'))	
+		self['key_green']  = Label(_('Remove'))
 		self['key_red']  = Label(_('Exit'))
-		
+
 		if self.type == self.DOWNLOAD:
 			self["text"] = Label(_("Downloading plugin information. Please wait..."))
 		self.run = 0
@@ -249,7 +249,7 @@ class	AddonsRemove(Screen):
 			"back": self.requestClose,
 			"green": self.install,
 			"red": self.close,
-			
+
 		})
 		if os.path.isfile('/usr/bin/opkg'):
 			self.ipkg = '/usr/bin/opkg'
@@ -266,7 +266,7 @@ class	AddonsRemove(Screen):
 			return
 
 		sel = sel[0]
-		if isinstance(sel, str): 
+		if isinstance(sel, str):
 
 			if sel in self.expanded:
 
@@ -287,7 +287,7 @@ class	AddonsRemove(Screen):
 						list = self.setuplist
 						for item in list:
 							pluginfiles += item
-							pluginfiles += "\n" 
+							pluginfiles += "\n"
 							self.listplugininfo(pluginfiles)
 							self.list = []
 				else:
@@ -309,7 +309,7 @@ class	AddonsRemove(Screen):
 						list = self.setuplist
 						for item in list:
 							pluginfiles += item
-							pluginfiles += "\n" 
+							pluginfiles += "\n"
 							self.listplugininfo(pluginfiles)
 							self.list = []
 				else:
@@ -327,11 +327,11 @@ class	AddonsRemove(Screen):
 		for item in self.setuplist:
 			cmdList.append((IpkgComponent.CMD_REMOVE, { "package": PLUGIN_PREFIX + item }))
 		self.session.open(Ipkg_1, cmdList = cmdList)
-	
-		
+
+
 	def listplugininfo(self, pluginfiles):
 		try:
-			pluginfiles.split("/n")	
+			pluginfiles.split("/n")
 			self["status"].setText(pluginfiles)
 		except:
 			self["status"].setText("")
@@ -360,7 +360,7 @@ class	AddonsRemove(Screen):
 		if result is not None:
 			dest = result[1]
 			if dest.startswith('/'):
-				
+
 				dest = os.path.normpath(dest)
 				extra = '--add-dest %s:%s -d %s' % (dest,dest,dest)
 				Ipkg.opkgAddDestination(dest)
@@ -414,7 +414,7 @@ class	AddonsRemove(Screen):
 
 	def doRemove(self, callback, pkgname):
 		self.session.openWithCallback(callback, Console, cmdlist = [self.ipkg_remove + Ipkg.opkgExtraDestinations() + " " + self.PLUGIN_PREFIX + pkgname, "sync"], closeOnSuccess = True)
-					
+
 	def doInstall(self, callback, pkgname):
 		self.session.openWithCallback(callback, Console, cmdlist = [self.ipkg_install + " " + self.PLUGIN_PREFIX + pkgname, "sync"], closeOnSuccess = True)
 
@@ -466,7 +466,7 @@ class	AddonsRemove(Screen):
 			self.container.execute(self.ipkg + " update")
 		elif self.type == self.REMOVE:
 			self.run = 1
-			self.startIpkgListInstalled()			
+			self.startIpkgListInstalled()
 
 	def installFinished(self):
 		if hasattr(self, 'postInstallCall'):
@@ -531,13 +531,13 @@ class	AddonsRemove(Screen):
 			self.run = 3
 			return
 
-		
+
 		str = self.remainingdata + str
-		
+
 		lines = str.split('\n')
-		
+
 		if len(lines[-1]):
-			
+
 			self.remainingdata = lines[-1]
 			lines = lines[0:-1]
 		else:
@@ -558,7 +558,7 @@ class	AddonsRemove(Screen):
 		if self.run == 1:
 			for x in lines:
 				plugin = x.split(" - ", 2)
-				
+
 				if len(plugin) >= 2:
 					if not plugin[0].endswith('-dev') and not plugin[0].endswith('-staticdev') and not plugin[0].endswith('-dbg') and not plugin[0].endswith('-doc'):
 						if plugin[0] not in self.installedplugins:
@@ -599,7 +599,7 @@ class	AddonsRemove(Screen):
 		self.list = list
 		self["list"].l.setList(list)
 		self["text"] = Label(_("Downloading plugin information complete."))
-			
+
 ###################
 #Download Addons
 ###################
@@ -615,8 +615,8 @@ class Connection_Server(Screen):
 			<ePixmap name="red"    position="0,460"   zPosition="2" size="140,40" pixmap="skin_default/buttons/button_red.png" transparent="1" alphatest="on" />
 			<ePixmap name="green"  position="140,460" zPosition="2" size="140,40" pixmap="skin_default/buttons/button_green.png" transparent="1" alphatest="on" />
 
-			<widget name="key_red" position="0,450" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="#ffffff" font="Regular;20" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" /> 
-			<widget name="key_green" position="140,450" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="#ffffff" font="Regular;20" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" /> 
+			<widget name="key_red" position="0,450" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="#ffffff" font="Regular;20" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
+			<widget name="key_green" position="140,450" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="#ffffff" font="Regular;20" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
 
 			<eLabel position="70,100" zPosition="-1" size="100,69" backgroundColor="#222222" />
 			<widget name="info" position="100,230" zPosition="4" size="300,25" font="Regular;18" foregroundColor="#ffffff" transparent="1" halign="center" valign="center" />
@@ -633,7 +633,7 @@ class Connection_Server(Screen):
 		self["list"] = RSList([])
 		self['lab1'] = Label(_("It is recommended !!\nto mount the appropriate device before downloading.\nOtherwise\nPress OK to continue"))
 		self["info"] = Label()
-		self["actions"] = NumberActionMap(["WizardActions", "InputActions", "ColorActions", "DirectionActions"], 
+		self["actions"] = NumberActionMap(["WizardActions", "InputActions", "ColorActions", "DirectionActions"],
 		{
 			"ok": self.okClicked,
 			"back": self.close,
@@ -653,26 +653,26 @@ class Connection_Server(Screen):
 		self["info"].setText("Downloading list...")
 		testno = 1
 
-		xurl = 'https://opendroid.org/Addons/'+ self.addon + '/list'
+		xurl = 'https://raw.githubusercontent.com/ostende/Plugins-Panel/master/'+ self.addon + '/list'
 		print "xurl =", xurl
 		getPage(xurl).addCallback(self.gotPage).addErrback(self.getfeedError)
 
 	def gotPage(self, html):
-		print "html = ", html 
+		print "html = ", html
 		self.data = []
 		icount = 0
 		self.data = html.splitlines()
 		list = []
 		for line in self.data:
-			ipkname = self.data[icount] 
-			print "gotPage icount, ipk name =", icount, ipkname 
+			ipkname = self.data[icount]
+			print "gotPage icount, ipk name =", icount, ipkname
 			remname = ipkname
 			state = self.getstate(ipkname)
 			print "gotPage state, remname = ", state, remname
 			list.append(RSListEntry(remname, state))
 			icount = icount+1
 			self["list"].setList(list)
-			print 'self["list"] A =', self["list"] 
+			print 'self["list"] A =', self["list"]
 			self["info"].setText("")
 
 	def getfeedError(self, error=""):
@@ -699,10 +699,10 @@ class Connection_Server(Screen):
 
 	def keyLeft(self):
 		self["text"].left()
-	
+
 	def keyRight(self):
 		self["text"].right()
-	
+
 	def keyNumberGlobal(self, number):
 		print "pressed", number
 		self["text"].number(number)
@@ -717,14 +717,14 @@ class Installer_Addons(Screen):
 			<widget name="info" position="50,50" zPosition="4" size="500,400" font="Regular;22" foregroundColor="#ffffff" transparent="1" halign="left" valign="top" />
 			<ePixmap name="red"    position="0,450"   zPosition="2" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
 			<ePixmap name="green"  position="140,450" zPosition="2" size="140,40" pixmap="skin_default/buttons/green.png" transparent="1" alphatest="on" />
-			<ePixmap name="yellow" position="280,450" zPosition="2" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" /> 
-			<!--ePixmap name="blue"   position="420,450" zPosition="2" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" /--> 
-			<widget name="key_red" position="0,450" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="#ffffff" font="Regular;20" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" /> 
-			<widget name="key_green" position="140,450" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="#ffffff" font="Regular;20" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" /> 
+			<ePixmap name="yellow" position="280,450" zPosition="2" size="140,40" pixmap="skin_default/buttons/yellow.png" transparent="1" alphatest="on" />
+			<!--ePixmap name="blue"   position="420,450" zPosition="2" size="140,40" pixmap="skin_default/buttons/blue.png" transparent="1" alphatest="on" /-->
+			<widget name="key_red" position="0,450" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="#ffffff" font="Regular;20" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
+			<widget name="key_green" position="140,450" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="#ffffff" font="Regular;20" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
 			<!--widget name="key_yellow" position="280,450" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="#ffffff" font="Regular;20" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" />
 			<widget name="key_blue" position="420,450" size="140,50" valign="center" halign="center" zPosition="4"  foregroundColor="#ffffff" font="Regular;20" transparent="1" shadowColor="#25062748" shadowOffset="-2,-2" /-->
 		</screen>"""
- 
+
 	def __init__(self, session, ipk, addon):
 		Screen.__init__(self, session)
 		self.skin = Installer_Addons.skin
@@ -752,10 +752,10 @@ class Installer_Addons(Screen):
 		self.srefOld = self.session.nav.getCurrentlyPlayingServiceReference()
 		self.onLayoutFinish.append(self.openTest)
 	def openTest(self):
-		if not os.path.exists("/etc/ipkinst"): 
+		if not os.path.exists("/etc/ipkinst"):
 			cmd = "mkdir -p /etc/ipkinst"
 			os.system(cmd)
-		xurl1 = 'https://opendroid.org/Addons/' + self.addon + '/'
+		xurl1 = 'https://raw.githubusercontent.com/ostende/Plugins-Panel/master/' + self.addon + '/'
 		print "xurl1 =", xurl1
 		xurl2 = xurl1 + self.ipk
 		print "xurl2 =", xurl2
@@ -764,7 +764,7 @@ class Installer_Addons(Screen):
 		self.cmd1 = 'wget -O "' + xdest + '" "' + xurl2 + '"'
 		self.cmd2 = "opkg install --force-overwrite /tmp/" + self.ipk
 		self.cmd3 = "touch /etc/ipkinst/" + self.ipk + " &"
-		self.okClicked()    
+		self.okClicked()
 	def okClicked(self):
 		plug = self.ipk
 		title = _("Installing addon %s" %(plug))
@@ -777,7 +777,7 @@ class Installer_Addons(Screen):
 
 		if currentjob is not None:
 			self.session.open(JobView, currentjob)
- 
+
 	def install(self):
 		cmd = "opkg install --force-overwrite /tmp/" + self.ipk + ">/tmp/ipk.log"
 		print "cmd =", cmd
@@ -790,7 +790,7 @@ class Installer_Addons(Screen):
 		if os.path.isfile("/tmp/ipk.log")is not True :
 			cmd = "touch /tmp/ipk.log"
 			os.system(cmd)
-		else:	
+		else:
 			myfile = file(r"/tmp/ipk.log")
 			icount = 0
 			data = []
@@ -807,7 +807,7 @@ class Installer_Addons(Screen):
 	def endinstall(self):
 		path="/tmp"
 		tmplist = []
-		ipkname = 0  
+		ipkname = 0
 		tmplist=os.listdir(path)
 		print "files in /tmp", tmplist
 		icount = 0
@@ -815,10 +815,10 @@ class Installer_Addons(Screen):
 			nipk = tmplist[icount]
 			if (nipk[-3:]=="ipk"):
 				ipkname = nipk
-			icount = icount+1       
+			icount = icount+1
 
 		if ipkname != 0:
-			print "endinstall ipk name =", ipkname 
+			print "endinstall ipk name =", ipkname
 			ipos = ipkname.find("_")
 			remname = ipkname[:ipos]
 			print "endinstall remname =", remname
@@ -833,27 +833,27 @@ class Installer_Addons(Screen):
 
 	def keyLeft(self):
 		self["text"].left()
-	
+
 	def keyRight(self):
 		self["text"].right()
 
 	def keyNumberGlobal(self, number):
 		print "pressed", number
-		self["text"].number(number)        
- 
+		self["text"].number(number)
+
 class downloadJob(Job):
 	def __init__(self, toolbox, cmdline, filename, filetitle):
 		Job.__init__(self, _("Downloading"))
 		self.toolbox = toolbox
 		self.retrycount = 0
-		
+
 		downloadTask(self, cmdline, filename, filetitle)
 
 	def retry(self):
 		assert self.status == self.FAILED
 		self.retrycount += 1
 		self.restart()
-	
+
 class downloadTask(Task):
 	ERROR_CORRUPT_FILE, ERROR_RTMP_ReadPacket, ERROR_SEGFAULT, ERROR_SERVER, ERROR_UNKNOWN = range(5)
 	def __init__(self, job, cmdline, filename, filetitle):
@@ -863,7 +863,7 @@ class downloadTask(Task):
 		self.toolbox = job.toolbox
 		self.error = None
 		self.lasterrormsg = None
-		
+
 	def processOutput(self, data):
 		try:
 			if data.endswith('%)'):
@@ -883,7 +883,7 @@ class downloadTask(Task):
 
 	def processOutputLine(self, line):
 			self.error = self.ERROR_SERVER
-			
+
 	def afterRun(self):
 		pass
 
