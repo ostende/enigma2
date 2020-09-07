@@ -111,7 +111,7 @@ class AddonsUtility(Screen):
 		Screen.__init__(self, session)
 		self.list=[]
 		self.entrylist = []  #List reset
-		self.entrylist.append((_("Plugin"), "Plg", "/usr/lib/enigma2/python/OPENDROID/icons/Plugin.png"))
+		self.entrylist.append((_("Plugins"), "Plg", "/usr/lib/enigma2/python/OPENDROID/icons/Plugin.png"))
 		self.entrylist.append((_("Picons-HDD"), "Pcs-HDD", "/usr/lib/enigma2/python/OPENDROID/icons/Picons-HDD.png"))
 		self.entrylist.append((_("Picons-USB"), "Pcs-USB", "/usr/lib/enigma2/python/OPENDROID/icons/Picons-USB.png"))
 		self.entrylist.append((_("Setting"), "Stg", "/usr/lib/enigma2/python/OPENDROID/icons/Setting_list.png"))
@@ -179,7 +179,7 @@ class AddonsUtility(Screen):
 	def updateList(self):
 		for i in self.entrylist:
 				res = [i]
-				res.append(MultiContentEntryText(pos=(60, 5), size=(300, 48), font=0, text=i[0]))
+				res.append(MultiContentEntryText(pos=(60, 5), size=(380, 48), font=0, text=i[0]))
 				picture=LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, i[2]))
 				res.append(MultiContentEntryPixmapAlphaTest(pos=(5, 1), size=(48, 48), png=picture))
 				self.list.append(res)
