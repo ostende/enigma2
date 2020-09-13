@@ -56,7 +56,7 @@
 		<item level="2" text="Ignore DVB-C namespace sub network" description="On valid ONIDs, ignore frequency sub network part">config.usage.subnetwork_cable</item>
 		<item level="2" text="Ignore DVB-T namespace sub network" description="On valid ONIDs, ignore frequency sub network part">config.usage.subnetwork_terrestrial</item>
 		<item level="1" text="Delivery system workaround" description="Workaround for old tuner driver" requires="need_dsw">config.usage.enable_delivery_system_workaround</item>
-		<!--item level="2" text="Enable Startup Bootvideo" description="You can Enable or Disable the Startup Bootvideo.">config.misc.bootvideo</item-->
+		<item level="2" text="Enable Startup Bootvideo" description="You can Enable or Disable the Startup Bootvideo.">config.misc.bootvideo</item>
 		<item level="1" text="After PowerLost" description="Select what should be done when the %s %s was shutdown incorrectly, or after the Power was lost.">config.usage.shutdownNOK_action</item>
 		<item level="1" text="Boot-up action" description="Select what should be done when the %s %s was boot-up, normal playing or goto standby.">config.usage.boot_action</item>
 		<item level="1" text="Use workaround for wakeup from deep-standby?" description="If enabled, will checks for the time after the start of the receiver is within the time window and optionally switched to standby. If disabled, must additional be available a signal for the successful wakeup detection. (some receiver send a false or none signal)">config.workaround.deeprecord</item>
@@ -380,7 +380,7 @@
 		<item level="0" text="Up/Down button mode" description="Select what you want the Up/Down button to activate:">config.usage.updownbutton_mode</item>
 		<!--item level="0" text="OPENDROID Green button mode" description="Select what you want the Green button to activate:">config.usage.greenbutton_mode</item-->
 		<!--item level="0" text="OPENDROID Blue button mode" description="Select what you want the Blue button to activate:">config.usage.bluebutton_mode</item-->
-		<!--item level="0" text="Select Yellow Key Action" description="Select what you want the YELLOW button to activate:">config.OPD_panel_yellowkey.list</item-->
+		<item level="0" text="Select Yellow Key Action" description="Select what you want the YELLOW button to activate:">config.OPD_panel_yellowkey.list</item>
 	        <item level="0" text="Select Yellow Key Action long" description="Select what you want the YELLOW-Long button to activate:">config.plugins.OPDBoot_yellowkey.listLong</item>
 		</setup>
 	<setup level="2" key="softcamsetup" title="Softcam settings">

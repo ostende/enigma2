@@ -6,7 +6,7 @@ from Tools.Alternatives import GetWithAlternative
 from Components.config import config
 from enigma import eServiceCenter, eServiceReference
 
-searchPaths = ('/usr/share/enigma2/%s/', '/media/usb/%s/')
+searchPaths = ('/usr/share/enigma2/%s/', '/media/usb/%s/', '/media/hdd/%s/')
 path = "picon"
 nameCache = { }
 pngname = ""
