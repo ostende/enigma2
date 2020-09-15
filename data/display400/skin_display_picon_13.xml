@@ -18,20 +18,19 @@
 		<!-- pick a funky name for the font, so we don't conflict  -->
 		<font filename="nmsbd.ttf" name="FdLcD" scale="100"/>
 	</fonts>
+<!-- template -->
+	<screen name="SummaryClockPanel">
+		<widget source="global.CurrentTime" render="Label" position="center,center" size="100,45" font="FdLcD;40" halign="right" valign="bottom" noWrap="1">
+			<convert type="ClockToText"></convert>
+		</widget>
+	</screen>
 <!-- main-->
-	<screen name="InfoBarSummary" position="fill" >
-		<widget source="session.CurrentService" render="PiconRes" zPosition="1" position="center,0" size="150,90" alphatest="on" >
+	<screen name="InfoBarSummary" position="0,0" size="400,240">
+		<widget source="session.CurrentService" render="PiconRes" position="center,center" zPosition="1" halign="center" valign="center" size="300,180" alphatest="on">
 			<convert type="ServiceName">Reference</convert>
 		</widget>
-		<widget source="session.Event_Now" render="Label" position="0,100" size="400,90" font="FdLcD;40" halign="center" valign="center" >
-			<convert type="EventName">Name</convert>
-		</widget>
-		<widget source="session.Event_Now" render="Label" position="0,200" size="200,40" font="FdLcD;40" foregroundColor="#F78181" >
-			<convert type="EventTime">Remaining</convert>
-			<convert type="RemainingToText">FOLLOW</convert>
-		</widget>
-		<widget source="session.Event_Now" render="Progress" position="200,200" size="200,40" borderWidth="4" >
-			<convert type="EventTime">Progress</convert>
+		<widget source="session.RecordState" render="FixedLabel" text="Record" position="center,205" foregroundColor="#ff0000" size="100,25" font="FdLcD;25" zPosition="0" noWrap="1">
+			<convert type="ConditionalShowHide">Blink</convert>
 		</widget>
 	</screen>
 	<include filename="~/skin_display.xml" />

@@ -17,16 +17,13 @@
 	<fonts>
 		<!-- pick a funky name for the font, so we don't conflict  -->
 		<font filename="nmsbd.ttf" name="FdLcD" scale="100"/>
-		<font filename="verdana.ttf" name="FdLcDLight" scale="90"/>
 	</fonts>
-        <include filename="/usr/share/enigma2/display/skin_display.xml" />
 <!-- template -->
 	<screen name="SummaryClockPanel">
 		<widget source="global.CurrentTime" render="Label" position="250,185" size="150,55" font="FdLcD;55" halign="right" valign="bottom" noWrap="1">
 			<convert type="ClockToText"></convert>
 		</widget>
 	</screen>
-
 <!-- main-->
 	<screen name="InfoBarSummary" position="0,0" size="400,240">
 		<widget source="session.CurrentService" render="Label" position="0,5" size="400,70" font="FdLcD;30" valign="center" halign="center" foregroundColor="#FFFF00" >
@@ -68,4 +65,6 @@
 		</widget>
 		<panel name="SummaryClockPanel" />
 	</screen>
+	<include filename="~/skin_display.xml" />
+	<include filename="~/skin_common.xml" />
 </skin>
