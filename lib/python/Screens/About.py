@@ -1291,7 +1291,7 @@ class TranslationInfo(Screen):
 		if infomap.get("Report-Msgid-Bugs-To", "") != "":
 			linfo += _("Report Msgid Bugs To")	+ ":" + infomap.get("Report-Msgid-Bugs-To", "") + "\n"
 		else:
-			linfo += _("Report Msgid Bugs To")	+ ":" + "opendroid2013@gmail.com" + "\n"
+			linfo += _("Report Msgid Bugs To")	+ ":" + "redouaneelrhachi@gmail.com" + "\n"
 		self["AboutScrollLabel"] = ScrollLabel(linfo)
 
 
@@ -1317,7 +1317,7 @@ class CommitInfo(Screen):
 
 		self.project = 0
 		self.projects = [
-			("opendroid-Team",      "enigma2",               "opendroid-Team Enigma2",             "7.0", "github"),
+			("ostende",      "enigma2",               "Ostende Enigma2 Mod",             "7.0", "github"),
 			("ostende",      "enigma2",               "Ostende E2 Mod",             "7.0", "github"),
 			("ostende",      "Skins-for-openOPD",             "Ostende Mod Skins-for-openOPD",   "master", "github"),
 			("oe-alliance",   "oe-alliance-core",     "OE Alliance Core",             "4.4", "github"),
