@@ -662,7 +662,11 @@ class ModelPic(Screen):
 		elif getBoxType() in ('osninopro'):
 			model = "osninopro.png"	
 		elif getBoxType() in ('gbtrio4k'):
-			model = "gbtrio4k.png"	
+			model = "gbtrio4k.png"		
+		elif getBoxType() in ('dm900'):
+			model = "dm900.png"		
+		elif getBoxType() in ('dm920'):
+			model = "dm920.png"	
 		else:
 			model = None
 		poster_path = "/usr/share/enigma2/%s" % model
