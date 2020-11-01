@@ -145,11 +145,11 @@ class About(Screen):
 				line = line.strip()
 				freeflash += line
 				return str(freeflash)
-		self["lab1"] = StaticText(_("OpenDroid by OPD Image Team"))
-		self["lab2"] = StaticText(_("Support at") + " www.droidsat.org")
+		self["lab1"] = StaticText(_("OpenDroid by OSTENDE"))
+		self["lab2"] = StaticText(_("Support at") + " www.tunisia-sat.com")
 		model = None
 		AboutText = ""
-		self["lab2"] = StaticText(_("Support:") + " www.droidsat.org")
+		self["lab2"] = StaticText(_("Support:") + " www.tunisia-sat.com")
 		AboutText += _("Model:\t%s %s\n") % (getMachineBrand(), getMachineName())
 
 		if path.exists('/proc/stb/info/chipset'):
@@ -829,7 +829,7 @@ class SystemMemoryInfo(Screen):
 		Screen.setTitle(self, _("Memory Information"))
 		self.skinName = ["SystemMemoryInfo", "About"]
 		self["lab1"] = StaticText(_("OpenDroid"))
-		self["lab2"] = StaticText(_("By OPD Image Team"))
+		self["lab2"] = StaticText(_("By Ostende"))
 		self["AboutScrollLabel"] = ScrollLabel()
 
 		self["actions"] = ActionMap(["SetupActions", "ColorActions"],
@@ -1318,8 +1318,8 @@ class CommitInfo(Screen):
 		self.project = 0
 		self.projects = [
 			("opendroid-Team",      "enigma2",               "opendroid-Team Enigma2",             "7.0", "github"),
-			("formiano",      "E2",               "formiano E2",             "7.0", "github"),
-			("opendroid-Team",      "Skins-for-openOPD",             "opendroid-Team Skins-for-openOPD",   "master", "github"),
+			("ostende",      "enigma2",               "Ostende E2 Mod",             "7.0", "github"),
+			("ostende",      "Skins-for-openOPD",             "Ostende Mod Skins-for-openOPD",   "master", "github"),
 			("oe-alliance",   "oe-alliance-core",     "OE Alliance Core",             "4.4", "github"),
 			("oe-alliance",   "oe-alliance-plugins",  "OE Alliance Plugins",          "master", "github"),
 			("oe-alliance",   "enigma2-plugins",      "OE Alliance Enigma2 Plugins",  "master", "github")
@@ -1402,8 +1402,8 @@ class ContactInfo(Screen):
 		self["manufacturerinfo"] = StaticText(self.getManufacturerinfo())
 
 	def getManufacturerinfo(self):
-		minfo = "Opendroid Team\n"
-		minfo += "https://droidsat.org/forum\n"
+		minfo = "Ostende Image Mod\n"
+		minfo += "tunisia-sat.com/forums\n"
 		return minfo
 class MemoryInfo(Screen):
 	def __init__(self, session):
